@@ -1,0 +1,40 @@
+version: "3.9"
+
+x-node: &node
+  build: ./node
+  privileged: true
+  command: /sbin/init
+  tty: true
+
+services:
+  ansible:
+    container_name: ansible
+    hostname: ansible
+    depends_on:
+      - node01
+      - node02
+      - node03
+    build: ./ansible
+    tty: true
+    working_dir: /root/work
+    volumes:
+      - ./work:/root/work
+
+  node01:
+    hostname: node01
+    container_name: node01
+    <<: *node
+    ports:
+      - '8101:80'
+  node02:
+    hostname: node02
+    container_name: node02
+    <<: *node
+    ports:
+      - '8102:80'
+  node03:
+    hostname: node03
+    container_name: node03
+    <<: *node
+    ports:
+      - '8103:80'
