@@ -6,10 +6,14 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     wget \
     sudo \
+    sshpass\
     && apt-add-repository --yes --update ppa:ansible/ansible \
     && apt-get install -y ansible
 RUN mkdir /root/.ssh/ 
 RUN ssh-keygen -f /root/.ssh/id_ecdsa -t ecdsa -b 521 -N '' \
     && cp -p /root/.ssh/id_ecdsa.pub /root/.ssh/authorized_keys
 ADD ansible.cfg /etc/ansible
-CMD ["/bin/bash"]
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/bin/bash" ]
