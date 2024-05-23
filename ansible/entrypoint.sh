@@ -38,7 +38,7 @@ function setup_hosts() {
 setup_pubkey
 setup_sshd_config
 reload_sshd
-if [ $(grep -E 'node0[1-3]' /etc/hosts | wc -l) -eq 3 ]; then 
+if [ $(grep -E 'node0[1-3]' /etc/hosts | wc -l) -eq 0 ]; then 
     setup_hosts
 fi
 

@@ -37,29 +37,4 @@
         name: glusterd
         state: started
         enabled: yes
-- name: deploy docker 
-  hosts: node
-  become: yes
-  gather_facts: no
-  tasks:
-      - name: docker install
-        apt: 
-          name: docker
-          state: latest
-          update_cache: yes
-####### docker in docker の設定は行っていないため起動させない
-#      - name: start & enabled docker
-#        service:
-#          name: docker
-#          state: started
-#          enabled: yes
-- name: deploy docker-compose
-  hosts: node
-  become: yes
-  gather_facts: no
-  tasks:
-      - name: docker-compose install
-        apt:
-          name: docker-compose
-          state: latest
-          update_cache: yes
+

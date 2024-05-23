@@ -11,11 +11,15 @@ docker-compose build --no-cache
 ```
 docker-compose up -d
 ```
-3. ansible コンテナから node コンテナに対して疎通確認
+3. ansible コンテナにログイン
+```
+docker exec -it ansible bash
+```
+4. ansible コンテナから node コンテナに対して疎通確認
 ```
 ansible node -m ping
 ```
-4. ansible コンテナから playbook を実行
+5. ansible コンテナから playbook を実行
 ```
 ansible-playbook install.yaml
 ```
